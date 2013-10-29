@@ -1,0 +1,38 @@
+#! /bin/sh
+DIALOG=${DIALOG=dialog}
+tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
+trap "rm -f $tempfile" 0 1 2 5 15
+
+$DIALOG --backtitle "Please choose your brightness" \
+	--title "The Brightness" --clear \
+        --menu "Hi, you can chooese your brightness here  " 15 40 10 \
+        "50"  "Brightness" \
+        "55"  "Brightness" \
+        "60"  "Brightness" \
+        "65"  "Brightness" \
+        "70"  "Brightness" \
+	"80"  "Brightness" \
+        "90"  "Brightness" \
+        "100"  "Brightness" \
+        "110"  "Brightness" \
+	"120"  "Brightness" \
+        "130"  "Brightness" \
+        "140"  "Brightness" \
+        "150"  "Brightness" \
+	"160"  "Brightness" \
+        "170"  "Brightness" \
+        "180"  "Brightness" \
+        "200"  "Brightness" \
+        "220"  "Brightness" 2> $tempfile
+
+retval=$?
+
+choice=`cat $tempfile`
+case $retval in
+  0)
+    `echo "$choice" > "/sys/class/backlight/radeon_bl0/brightness"`;;
+  1)
+    echo "Cancel pressed.";;
+  255)
+    echo "ESC pressed.";;
+esac
