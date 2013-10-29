@@ -1,4 +1,6 @@
-ktest1
-======
+This repo will contain some ubuntu usefull scrips for ubuntu
+============================================================
 
-GitTest Krasi
+I will put some TOC here someday.
+
+:-)
